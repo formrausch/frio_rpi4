@@ -1,8 +1,8 @@
 defmodule NervesSystemRpi4.MixProject do
   use Mix.Project
 
-  @github_organization "nerves-project"
-  @app :nerves_system_rpi4
+  @github_organization "formrausch"
+  @app :frio_rpi4
   @source_url "https://github.com/#{@github_organization}/#{@app}"
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
@@ -75,7 +75,7 @@ defmodule NervesSystemRpi4.MixProject do
   end
 
   defp description do
-    "Nerves System - Raspberry Pi 4 (64-bits)"
+    "Formrausch.io Nerves System - Raspberry Pi 4 (64-bits)"
   end
 
   defp docs do
