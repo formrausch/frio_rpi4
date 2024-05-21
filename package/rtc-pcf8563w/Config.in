@@ -1,0 +1,9 @@
+config BR2_PACKAGE_RTC_PCF8563W
+	bool "rtc-pcf8563w"
+	help
+	  rtc-pcf8563w
+
+          https://github.com/Seeed-Studio/seeed-linux-dtoverlays
+
+comment "rtc-pcf8563w needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL

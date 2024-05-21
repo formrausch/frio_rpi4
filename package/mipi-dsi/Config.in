@@ -1,0 +1,5 @@
+config BR2_PACKAGE_MIPI_DSI
+	bool "mipi-dsi"
+	help
+	  MIPI/DSI Display driver
+

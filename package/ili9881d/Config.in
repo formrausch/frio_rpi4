@@ -1,0 +1,9 @@
+config BR2_PACKAGE_ILI9881D
+	bool "ili9881d"
+	help
+	  ili9881d display driver
+
+          https://github.com/Seeed-Studio/seeed-linux-dtoverlays/tree/master/modules/ili9881d
+
+comment "ili9881d needs a Linux kernel to be built"
+	depends on !BR2_LINUX_KERNEL

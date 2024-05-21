@@ -2,3 +2,10 @@
 #
 # If these are non-proprietary, please consider contributing them back to
 # Nerves or Buildroot.
+#
+source "$NERVES_DEFCONFIG_DIR/package/ili9881d/Config.in"
+source "$NERVES_DEFCONFIG_DIR/package/reterminal-dm/Config.in"
+source "$NERVES_DEFCONFIG_DIR/package/mipi-dsi/Config.in"
+source "$NERVES_DEFCONFIG_DIR/package/ch34x/Config.in"
+source "$NERVES_DEFCONFIG_DIR/package/ltr30x/Config.in"
+source "$NERVES_DEFCONFIG_DIR/package/rtc-pcf8563w/Config.in"

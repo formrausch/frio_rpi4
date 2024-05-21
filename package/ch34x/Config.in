@@ -1,0 +1,10 @@
+config BR2_PACKAGE_CH34X
+	bool "ch34x"
+	help
+          CH34x
+
+
+
+comment "ch34x needs a Linux kernel and libiio to be built"
+	depends on !BR2_LINUX_KERNEL
+	depends on !BR2_LIBIIO

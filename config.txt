@@ -18,11 +18,13 @@ fixup_file=fixup4.dat
 
 # Disable the boot rainbow
 disable_splash=1
+ignore_lcd=1
 
 # This, along with the Raspberry Pi "x" firmware is needed for the camera
 # to work. The Raspberry Pi "x" firmware is selected via the Buildroot
 # configuration. See Target packages->Hardware handling->Firmware.
-gpu_mem=192
+gpu_mem=384
+#gpu_mem=512
 
 # Enable I2C and SPI
 dtparam=i2c_arm=on
@@ -38,8 +40,14 @@ camera_auto_detect=1
 display_auto_detect=1
 
 # Enable DRM VC4 V3D driver
-dtoverlay=vc4-kms-v3d
+#dtoverlay=vc4-kms-v3d
+dtoverlay=vc4-kms-v3d,cma-512
 max_framebuffers=2
+
+over_voltage=8
+arm_freq=2200
+gpu_freq=750
+arm_boost=1
 
 # Don't have the firmware create an initial video= setting in cmdline.txt.
 # Use the kernel's default instead.
@@ -47,6 +55,9 @@ disable_fw_kms_setup=1
 
 # Disable compensation for displays with overscan
 disable_overscan=1
+
+# enable 60fps
+hdmi_enable_4kp60=1
 
 # Comment this in or modify to enable OneWire
 # NOTE: check that the overlay that you specify is in the boot partition or
@@ -60,6 +71,9 @@ dtoverlay=dwc2
 # information across reboots in DRAM
 dtoverlay=ramoops
 
+total_mem=3072
+disable_overscan=1
+
 # Enable the UART (/dev/ttyS0)
 enable_uart=1
 
@@ -69,3 +83,22 @@ enable_uart=1
 # For the CM4 I/O board, USB is disabled by default. This enables it.
 dtoverlay=dwc2,dr_mode=host
 
+[all]
+
+[pi4]
+# Run as fast as firmware / board allows
+arm_boost=1
+
+[all]
+dtparam=i2c_vc=on
+enable_uart=1
+dtparam=ant2
+disable_splash=1
+ignore_lcd=1
+dtoverlay=dwc2,dr_mode=host
+dtoverlay=vc4-kms-v3d-pi4
+dtoverlay=i2c1,pins_2_3
+dtoverlay=i2c3,pins_4_5
+dtoverlay=imx219,cam0
+dtoverlay=reTerminal-plus
+dtoverlay=reTerminal-plus-overlay
