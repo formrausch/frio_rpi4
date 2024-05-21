@@ -42,7 +42,7 @@ defmodule NervesSystemRpi4.MixProject do
     [
       type: :system,
       artifact_sites: [
-        {:github_releases, "#{@github_organization}/#{@app}"}
+        {:prefix, "https://fra1.digitaloceanspaces.com//formrausch-io/frio_rpi4/"}
       ],
       build_runner_opts: build_runner_opts(),
       platform: Nerves.System.BR,
