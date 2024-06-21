@@ -1,4 +1,50 @@
-# Raspberry Pi 4 Model B (64-bit)
+# reTerminal DM / Raspberry Pi CM4 (64-bit)
+
+## How to build 
+
+There are several stumbling blocks building the need dependencies for
+weston and cog (webkitwpe):
+
+1. rpi-userland and mesa don't like each other providing egl/opengl. We removed rpi-userland (it's deprecated)
+2. The order in which the buildroot packages are compiled is non deterministic and some packages require but do not define dependencies.
+
+We had the most success when compiling in the following order
+
+* host-libyaml (needed for host-ruby which in turn is used the compile serveral packages)
+* libsoup3 (for TLS support in cog)
+* the rest 
+
+It helps to manually recompile the packages in buildroot after changing something. Recompile until it works.
+
+Webkitwpe is large and compilation is slow. In case it fails with a memory error just run make again.
+
+```
+make <pgk>-reconfigure
+```
+
+## reTermial DM
+
+The DSI-Display will not start by itself. This might be fixed later. Forcing modprobe to re-enable/reststart works though. For now pin 13 (backlight) is pulled up (full brightness) via dtoverlay in config.txt. The brightness might be changed using hardware PWM if the overlay is disabled.
+
+```
+:os.cmd(~c"modprobe -r vc4")
+:os.cmd(~c"modprobe vc4")
+```
+
+An example supervisor can be found in examples/kiosk.ex
+
+Code for the light sensor and led can be found in examples/hardware.ex
+
+
+## Cog
+
+cog needs a writeable directory. This can be configured but /data/nerves_weston works fine
+
+
+
+## What changed
+
+The artifact and firmwware will be large. The artifact is > 2GB and cannot be hosted on Github packages. The firmware is > 130MB. Because of this the fwup size for the A and B partion must be resized in fwup.conf
 
 [![CircleCI](https://circleci.com/gh/nerves-project/nerves_system_rpi4.svg?style=svg)](https://circleci.com/gh/nerves-project/nerves_system_rpi4)
 [![Hex version](https://img.shields.io/hexpm/v/nerves_system_rpi4.svg "Hex version")](https://hex.pm/packages/nerves_system_rpi4)

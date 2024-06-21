@@ -1,104 +1,47 @@
-# Default Nerves RPi 4 config.txt
-#
-# It's possible to override this file by using a custom fwup.conf
-# configuration to pull in a replacement.
-#
-# Useful links:
-# http://rpf.io/configtxt
-# https://www.raspberrypi.org/documentation/configuration/device-tree.md
-# https://github.com/raspberrypi/documentation/blob/master/configuration/device-tree.md
-# https://github.com/raspberrypi/firmware/blob/master/boot/overlays/README
-
-# Enable 64-bit support
 arm_64bit=1
-
-# We always use the same names. The variant is selected in fwup.conf.
 start_file=start4.elf
 fixup_file=fixup4.dat
 
-# Disable the boot rainbow
-disable_splash=1
-ignore_lcd=1
-
-# This, along with the Raspberry Pi "x" firmware is needed for the camera
-# to work. The Raspberry Pi "x" firmware is selected via the Buildroot
-# configuration. See Target packages->Hardware handling->Firmware.
-gpu_mem=384
-#gpu_mem=512
-
-# Enable I2C and SPI
-dtparam=i2c_arm=on
-dtparam=spi=on
-
-# Enable audio (loads snd_bcm3825)
-dtparam=audio=on
-
-# Automatically load overlays for detected cameras
-camera_auto_detect=1
-
-# Automatically load overlays for detected DSI displays
-display_auto_detect=1
-
-# Enable DRM VC4 V3D driver
-#dtoverlay=vc4-kms-v3d
-dtoverlay=vc4-kms-v3d,cma-512
-max_framebuffers=2
-
-over_voltage=8
-arm_freq=2200
+# Max for cm4
+over_voltage=6
+arm_freq=2147
 gpu_freq=750
-arm_boost=1
 
-# Don't have the firmware create an initial video= setting in cmdline.txt.
+arm_boost=1 # Don't have the firmware create an initial video= setting in cmdline.txt.
 # Use the kernel's default instead.
-disable_fw_kms_setup=1
-
-# Disable compensation for displays with overscan
-disable_overscan=1
-
-# enable 60fps
+#disable_fw_kms_setup=1
+#disable_overscan=1
 hdmi_enable_4kp60=1
 
-# Comment this in or modify to enable OneWire
-# NOTE: check that the overlay that you specify is in the boot partition or
-#       this won't work.
-#dtoverlay=w1-gpio-pullup,gpiopin=4
+# MIPI
+dtparam=i2c_arm=on
+dtparam=i2s=on
+dtparam=spi=on
+dtparam=audio=on
 
-# Support USB gadget mode on the USB-C port
-dtoverlay=dwc2
-
-# The ramoops overlay works with the pstore driver to preserve crash
-# information across reboots in DRAM
-dtoverlay=ramoops
-
-total_mem=3072
-disable_overscan=1
-
-# Enable the UART (/dev/ttyS0)
 enable_uart=1
+camera_auto_detect=1
+display_auto_detect=1
+max_framebuffers=2
 
-[cm4]
-# Raspberry Pi CM4-only settings
-
-# For the CM4 I/O board, USB is disabled by default. This enables it.
-dtoverlay=dwc2,dr_mode=host
-
-[all]
-
-[pi4]
-# Run as fast as firmware / board allows
-arm_boost=1
-
-[all]
 dtparam=i2c_vc=on
-enable_uart=1
 dtparam=ant2
 disable_splash=1
 ignore_lcd=1
+#lcd_rotate=2
+#display_lcd_rotate=1
+
 dtoverlay=dwc2,dr_mode=host
-dtoverlay=vc4-kms-v3d-pi4
+
+gpu_mem=512
+dtoverlay=vc4-kms-v3d-pi4,cma-512
 dtoverlay=i2c1,pins_2_3
 dtoverlay=i2c3,pins_4_5
 dtoverlay=imx219,cam0
-dtoverlay=reTerminal-plus
-dtoverlay=reTerminal-plus-overlay
+dtoverlay=ramoops
+dtparam=i2c0=on
+dtparam=i2c1=on
+dtparam=i2c1=on
+dtparam=i2c3=on
+gpio=13=pu
+dtoverlay=reTerminal-plus,tp_rotate=1

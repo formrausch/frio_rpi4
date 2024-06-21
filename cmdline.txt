@@ -5,4 +5,4 @@
 # 2. If not using HDMI, remove console=tty1 and consoleblank=0
 # 3. quiet skips printing kernel messages to the output and significantly
 #    shortens boot time
-dwc_otg.lpm_enable=0 console=tty1 console=serial0,115200 fbcon=scrollback:1024k root=/dev/mmcblk0p2 rootfstype=squashfs rootwait consoleblank=0 quiet swiotlb=131072 video=HDMI-A-1:1280x800@60D
+dwc_otg.lpm_enable=0 console=tty3 console=serial0,115200 fbcon=scrollback:1024k root=/dev/mmcblk0p2 rootfstype=squashfs quiet rootwait vt.global_cursor_default=0 loglevel=0 splash video=DSI-1:800x1280@60,rotate=270 swiotlb=262144
