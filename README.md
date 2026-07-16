@@ -1,3 +1,18 @@
+> [!WARNING]
+> **This repository is deprecated and no longer maintained.**
+>
+> `frio_rpi4` has been split into three separate Nerves system repositories under
+> the [`chromasurf`](https://github.com/chromasurf) org. Please use the repository
+> that matches your hardware target:
+>
+> | Hardware | Repository |
+> |----------|------------|
+> | reTerminal (CM4) | https://github.com/chromasurf/reterminal_cm4 |
+> | reTerminal DM (CM4) | https://github.com/chromasurf/reterminal_dm_cm4 |
+> | reComputer R100x (CM4) | https://github.com/chromasurf/recomputer_r100x_cm4 |
+
+---
+
 # reTerminal DM / Raspberry Pi CM4 (64-bit)
 
 This is the base Nerves System configuration for the seeed studios reTerminal DM (CM4)
